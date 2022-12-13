@@ -1,18 +1,23 @@
 using System.Collections.Generic;
-using Scrabble.Program;
+using Scrabble.Models;
 using System;
 
 namespace Scrabble.Models
 {
     public class ScrabbleScores
     {
-        public string Word { get; set; }
+        public string Word { get; set; } = "";
+        public string Response { get; set; } = "";
         public ScrabbleScores(string word)
         {
             Word = word;
+            Response = Response;
+        
         }
 
-        public int getPoints()
+    
+
+        public void getPoints()
         {
             char[] userWord = Word.ToCharArray();
             int score = 0;
@@ -50,12 +55,13 @@ namespace Scrabble.Models
                 }
                 else
                 {
-                    return score;
+            
                 }
+
+                    
             }
-
-            return score;
-
+             Response = score.ToString();
         }
+               
     }
 }

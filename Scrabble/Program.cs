@@ -1,18 +1,29 @@
-using System;
-using Scrabble.Models;
-using System.Collections.Generic;
+using Microsoft.AspNetCore.Builder;
+using Microsoft.Extensions.DependencyInjection;
 
-namespace Scrabble.Program
+namespace Scrabble
 {
-    public class Program
+    class Program
     {
-        static void Main()
+        static void Main(string[] args)
         {
-            Console.WriteLine("Welcome to Scrabble!");
-            Console.WriteLine("Enter a word to see its Scrabble Score!");
-            string userInput = Console.ReadLine();
-            ScrabbleScores newWord = new ScrabbleScores(userInput.ToLower());
-            Console.WriteLine(newWord.getPoints());
+            WebApplicationBuilder builder = WebApplication.CreateBuilder(args);
+
+            builder.Services.AddControllersWithViews();
+
+            WebApplication app = builder.Build();
+
+            // app.UseDeveloperExceptionPage();
+            app.UseHttpsRedirection();
+
+            app.UseRouting();
+
+            app.MapControllerRoute(
+              name: "default",
+              pattern: "{controller=Home}/{action=Index}/{id?}"
+            );
+
+            app.Run();
         }
     }
 }
